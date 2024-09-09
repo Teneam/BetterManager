@@ -20,9 +20,12 @@
       <OldZips Include="$(DestinationDirectory)$(AssemblyName)*.zip"/>
     </ItemGroup>
     <Copy SourceFiles="$(OutputAssemblyName).dll" DestinationFiles="$(ArtifactDestination)\BepInEx\plugins\$(AssemblyName).dll"/>
+	  <Copy SourceFiles="README.md" DestinationFiles="$(ArtifactDestination)\README.md"/>
+	  <Copy SourceFiles="icon.png" DestinationFiles="$(ArtifactDestination)\icon.png"/>
+	  <Copy SourceFiles="manifest.json" DestinationFiles="$(ArtifactDestination)\manifest.json"/>
     <Message Text="PluginVersion: $(PluginVersion), AssemblyVersion: $(AssemblyVersion), GameVersion: $(GameVersion)" Importance="high"/>
     <Delete Files="@(OldZips)" TreatErrorsAsWarnings="true" ContinueOnError="true"/>
-    <ZipDirectory SourceDirectory="$(ArtifactDestination)" DestinationFile="$(DestinationDirectory)$(ArtifactName).zip"/>
+    <ZipDirectory SourceDirectory="$(ArtifactDestination)" DestinationFile="$(DestinationDirectory)$(ArtifactName)-$(AssemblyVersion).zip"/>
   </Target>
   <!--Copies the assembly and pdb to the Beat Saber folder.-->
 	<Target Name="CopyToPlugins" AfterTargets="Build" Condition="'$(DisableCopyToPlugins)' != 'True'">
